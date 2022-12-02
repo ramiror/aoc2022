@@ -1,0 +1,6 @@
+awk '
+  BEGIN { t=0 }
+  /^$/  { print t; t=0 }
+        { t+=$1 }
+  END   { print t }
+' ${1:-input.txt} | sort -nr | head -1
