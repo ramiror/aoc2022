@@ -1,0 +1,31 @@
+cat ${1:-input.txt} | sed '
+    s/A X/3/;
+    s/A Y/4/;
+    s/A Z/8/;
+    s/B X/1/;
+    s/B Y/5/;
+    s/B Z/9/;
+    s/C X/2/;
+    s/C Y/6/;
+    s/C Z/7/;
+' |\
+    awk '
+      BEGIN { t=0 }
+            { t+=$1 }
+      /^$/  { print t; t=0 }
+      END   { print t }
+    ' | sort -nr | head -1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
