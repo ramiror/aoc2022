@@ -1,0 +1,7 @@
+cat ${1:-input.txt} |\
+  tr -- -, '  ' | while read a b c d; do
+    if [ \( $a -le $c -a $b -ge $d \) -o \
+         \( $a -ge $c -a $b -le $d \) ]; then
+      echo vamo lo pibe
+    fi
+  done | wc -l
