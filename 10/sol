@@ -1,0 +1,13 @@
+awk '
+    BEGIN { cycle=0; v=1 }
+    {
+        print cycle, v, $0; cycle+=1
+        if ((cycle==20) || ((cycle-20)%40 == 0)) { ss+=cycle*v; print cycle, "*", v, "=", cycle*v, ":", ss }
+    }
+    /addx/ {
+        cycle+=1
+        if ((cycle==20) || ((cycle-20)%40 == 0)) { ss+=cycle*v; print cycle, "*", v, "=", cycle*v, ":", ss }
+        v+=$2
+    }
+    END { print "signal sum", ss }
+'

@@ -1,0 +1,11 @@
+awk '
+    function draw() {
+        cycle+=1
+        if (v-x>=-1 && v-x<=1) { printf "#" } else { printf "." }
+        x+=1
+        if ((cycle>20) && ((cycle%40) == 0)) { print ""; x=0 }
+    }
+    BEGIN { cycle=0; v=1; x=0 }
+    { draw() }
+    /addx/ { draw(); v+=$2 }
+'
