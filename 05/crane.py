@@ -23,8 +23,14 @@ for line in tra:
         line.pop()
 # pprint.pprint(tra)
 
-def do_move(src, dst):
-    tra[dst-1].append(tra[src-1].pop())
+def do_move(amount, src, dst, is_9001):
+    if is_9001:
+        tra[src-1][-amount:] = reversed(tra[src-1][-amount:])
+    for times in range(amount):
+        tra[dst-1].append(tra[src-1].pop())
+
+import sys
+is_9001 = '2' == sys.argv[1]
 
 with open('instructions.tmp', 'r') as f:
     for move in f.readlines():
@@ -33,7 +39,6 @@ with open('instructions.tmp', 'r') as f:
         src=int(src)
         dst=int(dst)
         # print(amount, src, dst)
-        for count in range(amount):
-            do_move(src, dst)
+        do_move(amount, src, dst, is_9001)
 
 print(''.join([line[-1] for line in tra]))

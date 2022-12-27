@@ -1,8 +1,9 @@
-file=${1:-input.txt}
+part=${1:-1}
+file=${2:-input.txt}
 cat $file |\
   awk '/\[/,/^$/-1' |\
   sed 's/\(...\) /\1/g' |\
-  sed 's/   /\[ \]/g' | tee cosoloco |\
+  sed 's/   /\[ \]/g' |\
   sed 's/\[//g;s/\]//g' > dibujin.tmp
 
 cat $file |\
@@ -12,7 +13,7 @@ cat $file |\
   ' > instructions.tmp
 
 
-python crane.py dibujin.tmp instructions.tmp
+python crane.py $part
 
 rm dibujin.tmp
 rm instructions.tmp
